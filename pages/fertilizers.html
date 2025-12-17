@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizers & Nutrients - Mkulima AgroVet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2D5016;
+            --secondary: #E67E22;
+            --accent: #3498DB;
+            --dark: #2C3E50;
+            --light: #ECF0F1;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.6s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            animation: float 3s ease infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: width 0.4s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--secondary), #D35400);
+            color: var(--white);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+            font-size: 0.95rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(230, 126, 34, 0.6);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 0.8s ease;
+            font-weight: 800;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+            margin-bottom: 1rem;
+        }
+
+        .page-branding {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-container {
+            margin-bottom: 5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 1rem auto 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+        .product-card:nth-child(5) { animation-delay: 0.5s; }
+        .product-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .product-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 220px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--secondary), #D35400);
+            color: var(--white);
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-name {
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .product-type {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .product-description {
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .product-specs {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .product-specs strong {
+            color: var(--primary);
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .product-price {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .product-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(45, 80, 22, 0.3);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-radius: 12px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-section .product-btn {
+            background: var(--secondary);
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #34495E);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #BDC3C7;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: all 0.3s;
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.95rem;
+        }
+
+        .footer-section a::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+            padding-left: 30px;
+        }
+
+        .footer-section a:hover::before {
+            opacity: 1;
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-contact a {
+            color: var(--secondary);
+            padding: 0;
+            padding-left: 0;
+        }
+
+        .footer-contact a:hover {
+            padding-left: 0;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #BDC3C7;
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #25D366, #20BA61);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+            cursor: pointer;
+            transition: all 0.4s;
+            z-index: 999;
+            animation: float 2s ease infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 12px 45px rgba(37, 211, 102, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .page-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .breadcrumb {
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .cta-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .cta-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-section">
+                <span class="logo-icon">🌾</span>
+                <a href="../index.html" class="logo">Mkulima AgroVet</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#products">Products</a></li>
+                <li><a href="../index.html#features">Why Us</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+            <a href="tel:+254111627474" class="cta-btn">Call: 0111627474</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>›</span>
+        <span>Fertilizers & Nutrients</span>
+    </div>
+
+    <section class="page-header">
+        <h1 class="page-title">Fertilizers & Nutrients</h1>
+        <p class="page-subtitle">Premium soil nutrition solutions for enhanced crop growth</p>
+        <p class="page-branding">Mkulima AgroVet</p>
+    </section>
+
+    <div class="container">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Granular Fertilizers</h2>
+                <p class="section-description">Solid fertilizer formulations for soil application and crop nutrition</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/npk-fertilizer.jpg');">
+                        <span class="product-badge">Best Seller</span>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">NPK 17-17-17</div>
+                        <span class="product-type">Balanced Fertilizer</span>
+                        <p class="product-description">Complete balanced nutrition for all crop stages. Provides essential nitrogen, phosphorus, and potassium in optimal ratios. Promotes robust growth and consistent yields.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 1kg, 5kg, 50kg<br>
+                            <strong>Suitable Crops:</strong> Maize, vegetables, coffee, tea<br>
+                            <strong>Application:</strong> Top dressing at 4-6 weeks after planting
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 150/kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/dap-fertilizer.jpg');">
+                        <span class="product-badge">Popular</span>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">DAP 18-46-0</div>
+                        <span class="product-type">Phosphate Fertilizer</span>
+                        <p class="product-description">Diammonium phosphate enriched formula. Essential at planting for establishing strong root systems. High phosphorus content supports early growth development.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 1kg, 5kg, 50kg<br>
+                            <strong>Suitable Crops:</strong> Beans, maize, potatoes, wheat<br>
+                            <strong>Application:</strong> Planting time application
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 160/kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/can-fertilizer.jpg');">
+                        <span class="product-badge">Top Rated</span>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">CAN 27% Nitrogen</div>
+                        <span class="product-type">Nitrogen Fertilizer</span>
+                        <p class="product-description">Calcium ammonium nitrate for vigorous vegetative growth. Excellent for leafy crops and grains. Provides sustained nitrogen release throughout the season.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 1kg, 5kg, 50kg<br>
+                            <strong>Suitable Crops:</strong> Vegetables, cabbage, kale, cereals<br>
+                            <strong>Application:</strong> Top dressing at 4-6 weeks post-emergence
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 140/kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/ssa-fertilizer.jpg');">
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">Single Super Phosphate (SSP)</div>
+                        <span class="product-type">Phosphate Fertilizer</span>
+                        <p class="product-description">High-quality phosphate source with sulfur. Ideal for phosphorus-deficient soils. Enhances root development and flowering in legumes.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 5kg, 25kg, 50kg<br>
+                            <strong>Suitable Crops:</strong> Beans, peas, groundnuts<br>
+                            <strong>Application:</strong> Pre-planting soil incorporation
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 145/kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/micronutrient-mix.jpg');">
+                        <span class="product-badge">Specialized</span>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">Complete Micronutrient Mix</div>
+                        <span class="product-type">Trace Elements</span>
+                        <p class="product-description">Comprehensive blend of zinc, boron, iron, manganese, and copper. Prevents micronutrient deficiencies. Improves crop quality and disease resistance.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 500g, 1kg, 5kg<br>
+                            <strong>Suitable Crops:</strong> High-value horticultural crops<br>
+                            <strong>Application:</strong> Soil incorporation or foliar spray
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 450/kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/organic-compost.jpg');">
+                        <span class="product-badge">Organic</span>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">Certified Organic Compost</div>
+                        <span class="product-type">Organic Amendment</span>
+                        <p class="product-description">Fully matured composted organic matter enriched with beneficial microorganisms. Sustainable soil improvement for organic and conventional farming systems.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 5kg, 10kg, 50kg bags<br>
+                            <strong>Suitable Crops:</strong> All crops<br>
+                            <strong>Application:</strong> Pre-planting soil amendment, 2-3 tons per hectare
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 200/kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Foliar Feeds</h2>
+                <p class="section-description">Liquid fertilizers for direct foliar application and rapid nutrient uptake</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/foliar-booster.jpg');">
+                        <span class="product-badge">Premium</span>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">Premium Foliar Booster NPK</div>
+                        <span class="product-type">Liquid Fertilizer</span>
+                        <p class="product-description">Concentrated foliar spray formulation with complete NPK macro and micronutrients. Rapid absorption through leaves for quick nutrient correction and enhancement.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 500ml, 1L, 5L<br>
+                            <strong>Suitable Crops:</strong> All crops<br>
+                            <strong>Application:</strong> Foliar spray every 2-3 weeks during growing season
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 380/L</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/potassium-booster.jpg');">
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">Potassium-Rich Foliar Feed</div>
+                        <span class="product-type">Liquid Fertilizer</span>
+                        <p class="product-description">Specialized potassium formulation for fruit development and quality enhancement. Increases sweetness, color, and shelf life in horticultural crops.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 500ml, 1L, 5L<br>
+                            <strong>Suitable Crops:</strong> Tomatoes, peppers, fruits, horticultural crops<br>
+                            <strong>Application:</strong> Flowering and fruiting stage, bi-weekly
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 420/L</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/nitrogen-foliar.jpg');">
+                        <span class="product-badge">Fast Acting</span>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">High-Nitrogen Foliar Spray</div>
+                        <span class="product-type">Nitrogen Solution</span>
+                        <p class="product-description">Soluble nitrogen source for rapid greening and vegetative growth promotion. Fast results visible within 3-5 days of application.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 500ml, 1L, 5L<br>
+                            <strong>Suitable Crops:</strong> Leafy vegetables, grains, pasture<br>
+                            <strong>Application:</strong> Early growth stage, weekly sprays
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 350/L</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/calcium-boron.jpg');">
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">Calcium-Boron Foliar Feed</div>
+                        <span class="product-type">Specialty Foliar</span>
+                        <p class="product-description">Prevents blossom-end rot and improves fruit quality. Essential for solanaceae crops. Enhances pollination and fruit set.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 500ml, 1L<br>
+                            <strong>Suitable Crops:</strong> Tomatoes, peppers, cucumbers<br>
+                            <strong>Application:</strong> Flowering and early fruiting, weekly
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 410/L</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/micronutrient-foliar.jpg');">
+                        <span class="product-badge">Complete</span>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">Micronutrient Foliar Complex</div>
+                        <span class="product-type">Trace Element Solution</span>
+                        <p class="product-description">Complete micronutrient package in chelated form for optimal plant availability. Corrects deficiency symptoms rapidly through foliar absorption.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 500ml, 1L<br>
+                            <strong>Suitable Crops:</strong> All crops, especially high-value horticultural<br>
+                            <strong>Application:</strong> Every 2-3 weeks or as needed for deficiency correction
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 490/L</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/iron-foliar.jpg');">
+                    </div>
+                    <div class="product-content">
+                        <div class="product-name">Iron-Enriched Foliar Feed</div>
+                        <span class="product-type">Iron Solution</span>
+                        <p class="product-description">Chelated iron formulation for correcting chlorosis in high-pH soils. Restores green foliage coloration rapidly.</p>
+                        <div class="product-specs">
+                            <strong>Available Sizes:</strong> 500ml, 1L<br>
+                            <strong>Suitable Crops:</strong> Vegetables, flowers, ornamentals<br>
+                            <strong>Application:</strong> Bi-weekly during active growth or when chlorosis appears
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 400/L</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Need Fertilizer Guidance?</h2>
+            <p>Our agronomists provide personalized recommendations based on your soil and crop requirements</p>
+            <a href="tel:+254111627474" class="product-btn">Call 0111627474 - Free Consultation</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Mkulima AgroVet</h3>
+                <p>Leading agricultural input supplier in Kenya. PCPB Certified quality products and expert agronomic support for sustainable farming productivity.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Product Categories</h3>
+                <ul>
+                    <li><a href="fertilizers.html">Fertilizers & Nutrients</a></li>
+                    <li><a href="pest-control.html">Pest & Disease Control</a></li>
+                    <li><a href="weed-control.html">Weed Control</a></li>
+                    <li><a href="seeds.html">Certified Seeds</a></li>
+                    <li><a href="growth-enhancers.html">Growth Enhancers</a></li>
+                    <li><a href="animal-feeds.html">Animal Feeds</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Navigation</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#products">Products</a></li>
+                    <li><a href="../index.html#features">Why Mkulima</a></li>
+                    <li><a href="../index.html#contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <div class="footer-contact">
+                    <strong>Phone:</strong>
+                    <a href="tel:+254111627474">0111627474</a>
+                    <strong style="margin-top: 0.5rem;">Support Hours:</strong>
+                    <span>Monday - Saturday: 8:00 AM - 5:00 PM</span>
+                    <span>Sunday: 9:00 AM - 2:00 PM</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Mkulima AgroVet. All rights reserved. PCPB Certified | KEPHIS Approved</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/254111627474" class="whatsapp-float" target="_blank" title="Contact via WhatsApp">💬</a>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

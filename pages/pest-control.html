@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pest & Disease Control - Nairobi AgroVet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2D5016;
+            --secondary: #E67E22;
+            --accent: #3498DB;
+            --dark: #2C3E50;
+            --light: #ECF0F1;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.6s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            animation: float 3s ease infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: width 0.4s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--secondary), #D35400);
+            color: var(--white);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(230, 126, 34, 0.6);
+        }
+
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #E74C3C, #C0392B);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+        .product-card:nth-child(5) { animation-delay: 0.5s; }
+        .product-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .product-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 220px;
+            background: linear-gradient(135deg, #E74C3C, #C0392B);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--secondary), #D35400);
+            color: var(--white);
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            z-index: 10;
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .product-category {
+            color: #E74C3C;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .product-description {
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .product-specs {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            gap: 1rem;
+        }
+
+        .product-price {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .product-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(45, 80, 22, 0.3);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #34495E);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .footer-section a {
+            color: #BDC3C7;
+            text-decoration: none;
+            display: block;
+            padding: 0.4rem 0;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+            padding-left: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #BDC3C7;
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #25D366, #20BA61);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+            cursor: pointer;
+            transition: all 0.4s;
+            z-index: 999;
+            animation: float 2s ease infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 12px 45px rgba(37, 211, 102, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .breadcrumb {
+                padding: 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">🌾</span>
+                <span>Nairobi AgroVet</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="../index.html#products">Products</a></li>
+                <li><a href="../index.html#features">Why Us</a></li>
+                <li><a href="../index.html#testimonials">Reviews</a></li>
+            </ul>
+            <a href="https://wa.me/254712345678?text=Hi%20Nairobi%20AgroVet,%20I%20need%20pest%20control%20solutions" class="cta-btn" target="_blank">WhatsApp Us</a>
+        </nav>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>›</span>
+        <a href="../index.html#products">Products</a>
+        <span>›</span>
+        <span>Pest & Disease Control</span>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <h1>🛡️ Pest & Disease Control</h1>
+        <p>Fast-acting solutions to protect your crops from pests and diseases</p>
+    </section>
+
+    <!-- PRODUCTS -->
+    <div class="container">
+        <h2 class="section-title">Premium Pest Control Products</h2>
+
+        <div class="products-grid">
+            <!-- Product 1: Armyworm Destroyer -->
+            <div class="product-card">
+                <div class="product-image">
+                    🛡️
+                    <span class="product-badge">Fast Acting</span>
+                </div>
+                <div class="product-content">
+                    <h3>Armyworm Destroyer</h3>
+                    <span class="product-category">Insecticide</span>
+                    <p class="product-description">Powerful formula against fall armyworm (FAW). Works within 24 hours with rapid knockdown action. Safe for beneficial insects and pollinators when used correctly.</p>
+                    <div class="product-specs">
+                        📦 <strong>Sizes:</strong> 100ml, 500ml, 1L<br>
+                        🌾 <strong>For:</strong> Maize, sorghum, wheat<br>
+                        💡 <strong>Application:</strong> Spray during early infestation
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">From KES 400</span>
+                        <a href="https://wa.me/254712345678?text=I%20need%20Armyworm%20Destroyer%20urgently" class="product-btn" target="_blank">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2: Blight Guard Plus -->
+            <div class="product-card">
+                <div class="product-image">
+                    🛡️
+                    <span class="product-badge">Long Lasting</span>
+                </div>
+                <div class="product-content">
+                    <h3>Blight Guard Plus</h3>
+                    <span class="product-category">Fungicide</span>
+                    <p class="product-description">Systemic protection against early and late blight. Rain-fast in 2 hours. Provides 14-21 days of continuous protection with excellent curative action.</p>
+                    <div class="product-specs">
+                        📦 <strong>Sizes:</strong> 50g, 100g, 250g<br>
+                        🌾 <strong>For:</strong> Tomatoes, potatoes, peppers<br>
+                        💡 <strong>Application:</strong> Preventive spray program
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">From KES 350</span>
+                        <a href="https://wa.me/254712345678?text=Tell%20me%20about%20Blight%20Guard%20Plus" class="product-btn" target="_blank">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3: Aphid Terminator -->
+            <div class="product-card">
+                <div class="product-image">
+                    🛡️
+                    <span class="product-badge">Broad Spectrum</span>
+                </div>
+                <div class="product-content">
+                    <h3>Aphid & Thrips Terminator</h3>
+                    <span class="product-category">Insecticide</span>
+                    <p class="product-description">Effective against aphids, thrips, whiteflies, and mites. Contact and systemic action. Perfect for vegetables and ornamental crops. Relatively low toxicity.</p>
+                    <div class="product-specs">
+                        📦 <strong>Sizes:</strong> 250ml, 500ml, 1L<br>
+                        🌾 <strong>For:</strong> Vegetables, beans, coffee, cotton<br>
+                        💡 <strong>Application:</strong> Weekly sprays during infestation
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">From KES 380</span>
+                        <a href="https://wa.me/254712345678?text=I%20want%20Aphid%20%26%20Thrips%20Terminator" class="product-btn" target="_blank">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4: Coffee Berry Disease Guard -->
+            <div class="product-card">
+                <div class="product-image">
+                    🛡️
+                    <span class="product-badge">Specialized</span>
+                </div>
+                <div class="product-content">
+                    <h3>CBD Guard - Coffee Berry Disease</h3>
+                    <span class="product-category">Fungicide</span>
+                    <p class="product-description">Specialized protection against coffee berry disease (CBD). Critical for coffee farmers. Works both preventively and curatively for maximum crop protection.</p>
+                    <div class="product-specs">
+                        📦 <strong>Sizes:</strong> 100g, 250g, 500g<br>
+                        🌾 <strong>For:</strong> Coffee plantations<br>
+                        💡 <strong>Application:</strong> Spray before flowering season
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">From KES 420</span>
+                        <a href="https://wa.me/254712345678?text=I%20need%20CBD%20Guard%20for%20coffee" class="product-btn" target="_blank">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5: Rust Fighter -->
+            <div class="product-card">
+                <div class="product-image">
+                    🛡️
+                    <span class="product-badge">Premium</span>
+                </div>
+                <div class="product-content">
+                    <h3>Rust Fighter Pro</h3>
+                    <span class="product-category">Fungicide</span>
+                    <p class="product-description">Advanced formula against leaf rust and stem rust. Excellent for cereals and legumes. Provides superior disease control with extended plant health protection.</p>
+                    <div class="product-specs">
+                        📦 <strong>Sizes:</strong> 50g, 100g, 250g<br>
+                        🌾 <strong>For:</strong> Wheat, barley, beans, chickpeas<br>
+                        💡 <strong>Application:</strong> Early crop stage spray
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">From KES 400</span>
+                        <a href="https://wa.me/254712345678?text=I%20want%20Rust%20Fighter%20Pro" class="product-btn" target="_blank">Order Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6: Caterpillar Control -->
+            <div class="product-card">
+                <div class="product-image">
+                    🛡️
+                    <span class="product-badge">Effective</span>
+                </div>
+                <div class="product-content">
+                    <h3>Caterpillar Control Supreme</h3>
+                    <span class="product-category">Bio-Insecticide</span>
+                    <p class="product-description">Biological insecticide targeting leaf-eating caterpillars. Gut-action formula. Safe for the environment and beneficial insects. No residue issues.</p>
+                    <div class="product-specs">
+                        📦 <strong>Sizes:</strong> 100ml, 250ml, 500ml<br>
+                        🌾 <strong>For:</strong> Cabbages, tomatoes, maize<br>
+                        💡 <strong>Application:</strong> Bi-weekly spray program
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">From KES 360</span>
+                        <a href="https://wa.me/254712345678?text=I%20want%20Caterpillar%20Control%20Supreme" class="product-btn" target="_blank">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA SECTION -->
+    <section style="background: linear-gradient(135deg, #E74C3C, #C0392B); color: white; padding: 4rem 2rem; text-align: center; margin-top: 4rem;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Crop Protection Emergency?</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Quick response to protect your harvest. Our experts available 24/7</p>
+        <a href="https://wa.me/254712345678?text=I%20have%20a%20pest%20emergency%20on%20my%20farm" style="display: inline-block; background: var(--secondary); color: white; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);" target="_blank">Get Emergency Help Now</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🌾 Nairobi AgroVet</h3>
+                <p>Premium farm inputs and expert support since 2018. PCPB Certified • KEPHIS Approved</p>
+            </div>
+            <div class="footer-section">
+                <h3>Products</h3>
+                <ul>
+                    <li><a href="fertilizers.html">Fertilizers</a></li>
+                    <li><a href="pest-control.html">Pest Control</a></li>
+                    <li><a href="weed-control.html">Weed Control</a></li>
+                    <li><a href="seeds.html">Seeds</a></li>
+                    <li><a href="growth-enhancers.html">Growth Enhancers</a></li>
+                    <li><a href="soil-amendments.html">Soil Amendments</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#features">Why Us</a></li>
+                    <li><a href="../index.html#testimonials">Reviews</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Get In Touch</h3>
+                <ul>
+                    <li>📞 +254 712 345 678 (Sales)</li>
+                    <li>📞 +254 723 456 789 (Support)</li>
+                    <li>💬 <a href="https://wa.me/254712345678" target="_blank">WhatsApp Us</a></li>
+                    <li>📍 Wakulima Market, Nairobi CBD</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Nairobi AgroVet Supplies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/254712345678?text=Hello%20Nairobi%20AgroVet" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">💬</a>
+</body>
+</html>

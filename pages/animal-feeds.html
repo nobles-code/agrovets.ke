@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Feeds - Mkulima AgroVet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2D5016;
+            --secondary: #E67E22;
+            --accent: #3498DB;
+            --dark: #2C3E50;
+            --light: #ECF0F1;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--white);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--secondary), #D35400);
+            color: var(--white);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        .page-branding {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-container {
+            margin-bottom: 5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .product-image {
+            height: 220px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--secondary), #D35400);
+            color: var(--white);
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-name {
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .product-type {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .product-description {
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .product-specs {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            gap: 1rem;
+        }
+
+        .product-price {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .product-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-radius: 12px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark), #34495E);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .footer-section a {
+            color: #BDC3C7;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #BDC3C7;
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #25D366, #20BA61);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">🌾 Mkulima AgroVet</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#products">Products</a></li>
+            </ul>
+            <a href="tel:+254111627474" class="cta-btn">Call: 0111627474</a>
+        </nav>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a> › <span>Animal Feeds</span>
+    </div>
+
+    <section class="page-header">
+        <h1 class="page-title">Animal Feeds</h1>
+        <p class="page-subtitle">Nutritionally balanced feeds for optimal livestock productivity</p>
+        <p class="page-branding">Mkulima AgroVet</p>
+    </section>
+
+    <div class="container">
+        <!-- POULTRY SECTION -->
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">🐔 Poultry Feeds - Hens</h2>
+                <p class="section-description">Premium formulations for egg production and poultry health</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/layer-mash.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Premium Layer Mash</div>
+                        <span class="product-type">Complete Feed</span>
+                        <p class="product-description">Scientifically formulated complete feed for laying hens with high calcium and protein for optimal egg production and shell strength.</p>
+                        <div class="product-specs">
+                            <strong>Protein:</strong> 18-20%<br>
+                            <strong>Size:</strong> 50kg bags<br>
+                            <strong>Daily:</strong> 120-150g per bird
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">KES 4,500/50kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/grower-pellets.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Poultry Grower Pellets</div>
+                        <span class="product-type">Growth Feed</span>
+                        <p class="product-description">Specialized formula for developing pullets with balanced nutrition for skeletal development and sexual maturation.</p>
+                        <div class="product-specs">
+                            <strong>Protein:</strong> 16-18%<br>
+                            <strong>Size:</strong> 50kg bags<br>
+                            <strong>Daily:</strong> 100-130g per bird
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">KES 4,200/50kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/starter-chick.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Chick Starter Feed</div>
+                        <span class="product-type">Starter Formula</span>
+                        <p class="product-description">Premium formula for day-old chicks through 8 weeks with enhanced nutrition for rapid growth and immune development.</p>
+                        <div class="product-specs">
+                            <strong>Protein:</strong> 22-24%<br>
+                            <strong>Size:</strong> 50kg bags<br>
+                            <strong>Daily:</strong> 40-50g per chick
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">KES 5,200/50kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/poultry-premix.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Vitamin-Mineral Premix</div>
+                        <span class="product-type">Supplement</span>
+                        <p class="product-description">Complete vitamin and mineral blend enhancing immune function and bone strength for all poultry categories.</p>
+                        <div class="product-specs">
+                            <strong>Type:</strong> Complete premix<br>
+                            <strong>Sizes:</strong> 1kg, 5kg<br>
+                            <strong>Dosage:</strong> 1kg per ton
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 2,800/kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATTLE SECTION -->
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">🐄 Cattle Feeds - Dairy & Beef</h2>
+                <p class="section-description">Optimized nutrition for milk production and meat quality</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/dairy-concentrate.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Dairy Concentrate Pellets</div>
+                        <span class="product-type">Dairy Feed</span>
+                        <p class="product-description">Premium concentrate for lactating dairy cattle boosting milk yield and supporting overall cow health and composition.</p>
+                        <div class="product-specs">
+                            <strong>Protein:</strong> 16-18%<br>
+                            <strong>Size:</strong> 50kg bags<br>
+                            <strong>Daily:</strong> 2-4kg per cow
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">KES 3,800/50kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/beef-fattener.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Beef Fattener Pellets</div>
+                        <span class="product-type">Growth Feed</span>
+                        <p class="product-description">Specialized formula for rapid weight gain with higher energy content promoting efficient feed conversion and quality meat.</p>
+                        <div class="product-specs">
+                            <strong>Protein:</strong> 14-16%<br>
+                            <strong>Size:</strong> 50kg bags<br>
+                            <strong>Daily:</strong> 3-5kg per animal
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">KES 3,600/50kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/calf-starter.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Calf Starter Pellets</div>
+                        <span class="product-type">Starter Feed</span>
+                        <p class="product-description">Formulated for young calves from weaning through 6 months supporting skeletal and rumen development with early weight gain.</p>
+                        <div class="product-specs">
+                            <strong>Protein:</strong> 18-20%<br>
+                            <strong>Size:</strong> 50kg bags<br>
+                            <strong>Daily:</strong> 1-2kg per calf
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">KES 4,100/50kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/mineral-lick.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Mineral Lick Block</div>
+                        <span class="product-type">Mineral Supplement</span>
+                        <p class="product-description">Complete mineral and salt supplement providing essential trace elements in convenient block form for all cattle categories.</p>
+                        <div class="product-specs">
+                            <strong>Type:</strong> Mineral mix<br>
+                            <strong>Size:</strong> 5kg blocks<br>
+                            <strong>Usage:</strong> Free-access licking
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">KES 450/block</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIGS SECTION -->
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">🐷 Pig Feeds - Growth & Finishing</h2>
+                <p class="section-description">Balanced nutrition for pig health, growth, and market-ready weight</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/piglet-starter.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Piglet Starter Mash</div>
+                        <span class="product-type">Starter Feed</span>
+                        <p class="product-description">Premium post-weaned piglet formula with optimized digestibility supporting fast growth and smooth transition from milk feed.</p>
+                        <div class="product-specs">
+                            <strong>Protein:</strong> 20-22%<br>
+                            <strong>Size:</strong> 50kg bags<br>
+                            <strong>Daily:</strong> 0.5-1.5kg per piglet
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">KES 4,900/50kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/grower-finisher.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Grower-Finisher Pellets</div>
+                        <span class="product-type">Growth Feed</span>
+                        <p class="product-description">All-in-one formulation from 10 weeks to market maximizing weight gain and developing quality meat characteristics.</p>
+                        <div class="product-specs">
+                            <strong>Protein:</strong> 16-18%<br>
+                            <strong>Size:</strong> 50kg bags<br>
+                            <strong>Daily:</strong> 2-3kg per pig
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">KES 3,950/50kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/breeder-feed.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Breeding Sow Feed</div>
+                        <span class="product-type">Breeding Formula</span>
+                        <p class="product-description">Premium formula for pregnant and lactating sows supporting fetal development and milk production for piglet growth.</p>
+                        <div class="product-specs">
+                            <strong>Protein:</strong> 14-16%<br>
+                            <strong>Size:</strong> 50kg bags<br>
+                            <strong>Daily:</strong> 2-3kg per sow
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">KES 3,850/50kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('../images/products/pig-premix.jpg');"></div>
+                    <div class="product-content">
+                        <div class="product-name">Pig Feed Premix</div>
+                        <span class="product-type">Supplement</span>
+                        <p class="product-description">Complete vitamin, mineral, and amino acid premix ensuring balanced nutrition across all pig production stages.</p>
+                        <div class="product-specs">
+                            <strong>Type:</strong> Complete premix<br>
+                            <strong>Sizes:</strong> 1kg, 5kg<br>
+                            <strong>Dosage:</strong> 1kg per ton
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">From KES 2,900/kg</span>
+                            <a href="tel:+254111627474" class="product-btn">Inquire</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA SECTION -->
+        <div class="cta-section">
+            <h2>Maximize Your Livestock Productivity</h2>
+            <p>Expert nutritional advice and support for optimal herd and flock performance</p>
+            <a href="tel:+254111627474" class="product-btn" style="background: var(--secondary); display: inline-block;">Call 0111627474 - Free Consultation</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Mkulima AgroVet</h3>
+                <p>Premium agricultural and livestock feed supplier in Kenya. Quality products supporting profitable farming operations.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Product Categories</h3>
+                <ul>
+                    <li><a href="fertilizers.html">Fertilizers & Nutrients</a></li>
+                    <li><a href="pest-control.html">Pest Control</a></li>
+                    <li><a href="weed-control.html">Weed Control</a></li>
+                    <li><a href="seeds.html">Seeds</a></li>
+                    <li><a href="growth-enhancers.html">Growth Enhancers</a></li>
+                    <li><a href="animal-feeds.html">Animal Feeds</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#products">Products</a></li>
+                    <li><a href="../index.html#features">Why Mkulima</a></li>
+                    <li><a href="../index.html#contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><strong>Phone:</strong> <a href="tel:+254111627474">0111627474</a></p>
+                <p><strong>Hours:</strong><br>Mon-Sat: 8:00 AM - 5:00 PM<br>Sun: 9:00 AM - 2:00 PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Mkulima AgroVet. All rights reserved. PCPB Certified | KEPHIS Approved</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/254111627474" class="whatsapp-float" target="_blank">💬</a>
+</body>
+</html>
